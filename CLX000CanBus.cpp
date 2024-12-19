@@ -203,7 +203,7 @@ bool CLX000CanBus::packFrame(QCanBusFrame const& frame, QByteArray &packedFrame)
     /* Escape any 0x7E sequences */
     packedFrame.append(0x07E);
     for (char const& byteValue: payloadArray) {
-        if( byteValue == 0x7E ) {
+        if( byteValue == 0x7E || byteValue == 0x7D) {
             packedFrame.append(static_cast<quint8>(0x7D));
             packedFrame.append(static_cast<quint8>(byteValue ^ 0b00100000) );
         } else {
